@@ -1,7 +1,6 @@
 // Importing Packages 
 
 import { useEffect, useState } from "react"
-import './App.css'
 import client from 'socket.io-client'
 
 // React.js code (front-end) is connected to Node.js code (back-end or Server code).
@@ -38,8 +37,18 @@ function App() {
       delete serverAllUsers[socket.id];
       setAllUsers(serverAllUsers);
     });
+    
+    socket.on('winner', (winnerId) => {
+      if(winnerId == socket.id) {
+        alert('Game over,you won');
+        return;
+      };
+      alert('Game Over');
+    });
+    
     return () => {
       // turn off 'update-count' event 
+      socket.off('winner');
       socket.off('update-count');
     };
   }, []);
@@ -50,18 +59,39 @@ function App() {
   };
   
   // App function returns client counts
-
+  console.log(enemiesCounts)
   return (
     // By creating a div whose className is "card", and inside the div we have a button, for which when the customer clicks on that button, the sum of their counters increases by 1.
-    <div className="card">
+    <>
+      <div 
+          style={{
+            width: '100px',
+            height: '100px',
+            position: 'relative',
+            left: `${count * 10}px`,
+            marginButtom: '10px',
+            backgroundColor: 'pink'
+          }} 
+        />
+      {enemiesCounts.map((count,index) => {
+        <div 
+          style={{  
+            width: '100px',
+            height: '100px',
+            position: 'relative',
+            left: `${count * 10}px`,
+            marginButtom: '10px',
+            backgroundColor: 'pink'
+          }} 
+          key={index}
+        />
+      })}
+      <div className="card">
       <button onClick={handleButtonClick}>
         Click To Increase Count
       </button>
-      <p>Your Count Is {count}</p>
-      {enemiesCounts.map((count,index) => (
-        <p key={index}>Enemy Count Is {count}</p>
-      ))}
-    </div>
+      </div>
+    </>
   )
 };
 
