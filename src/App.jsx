@@ -69,27 +69,29 @@ function App() {
             height: '100px',
             position: 'relative',
             left: `${count * 10}px`,
-            marginButtom: '10px',
+            marginBottom: '10px',
             backgroundColor: 'pink'
           }} 
         />
       {enemiesCounts.map((count,index) => {
-        <div 
-          style={{  
-            width: '100px',
-            height: '100px',
-            position: 'relative',
-            left: `${count * 10}px`,
-            marginButtom: '10px',
-            backgroundColor: 'pink'
-          }} 
-          key={index}
+        return (
+          <div 
+            style={{  
+              width: '100px',
+              height: '100px',
+              position: 'relative',
+              left: `${count * 10}px`,
+              marginBottom: '10px',
+              backgroundColor: 'pink'
+            }} 
+            key={index}
         />
+        )
       })}
       <div className="card">
-      <button onClick={handleButtonClick}>
-        Click To Increase Count
-      </button>
+        <button onClick={handleButtonClick}>
+          Click To Increase Count
+        </button>
       </div>
     </>
   )
