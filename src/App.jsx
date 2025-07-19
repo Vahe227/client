@@ -5,7 +5,7 @@ import client from 'socket.io-client'
 
 // React.js code (front-end) is connected to Node.js code (back-end or Server code).
 
-const socket = client.io('http://localhost:3000');
+const socket = client.io('https://server-uar5.onrender.com');
 
 function App() {
 
